@@ -56,3 +56,6 @@ coverage/
 *.key
 *.pem
 secrets.json
+.env
+node_modules
+dist
