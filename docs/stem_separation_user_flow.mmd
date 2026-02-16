@@ -1,0 +1,163 @@
+flowchart TD
+    A[User Visits Stem Separation Tool] --> B{First Time User?}
+    
+    B -->|Yes| C[Show Welcome Tutorial]
+    B -->|No| D[Show Main Interface]
+    
+    C --> D
+    
+    D --> E[Display Pricing Options]
+    E --> F{User Action}
+    
+    F -->|View Pricing| G[Show Detailed Pricing Modal]
+    F -->|Upload File| H[File Upload Interface]
+    F -->|Browse Examples| I[Show Demo Results]
+    
+    G --> H
+    I --> H
+    
+    H --> J{File Validation}
+    
+    J -->|Invalid Format| K[Show Error Message]
+    J -->|File Too Large| L[Show Size Limit Warning]
+    J -->|Valid File| M[Display File Info]
+    
+    K --> H
+    L --> N[Suggest Compression Options]
+    N --> H
+    
+    M --> O[Show Quality Settings]
+    O --> P{User Selects Quality}
+    
+    P -->|Standard| Q[Set Processing Parameters - Fast]
+    P -->|High Quality| R[Set Processing Parameters - Balanced]
+    P -->|Premium| S[Set Processing Parameters - Best]
+    
+    Q --> T{Payment Required?}
+    R --> T
+    S --> T
+    
+    T -->|Free Trial Available| U[Start Processing]
+    T -->|Payment Required| V[Show Payment Options]
+    
+    V --> W{Payment Method}
+    
+    W -->|Per Song $9.99| X[Process Single Payment]
+    W -->|5-Song Pack $39.99| Y[Process Pack Payment]
+    W -->|Monthly $29.99| Z[Process Subscription]
+    
+    X --> AA{Payment Success?}
+    Y --> AA
+    Z --> AA
+    
+    AA -->|Failed| BB[Show Payment Error]
+    AA -->|Success| U
+    
+    BB --> V
+    
+    U --> CC[Initialize AI Processing]
+    CC --> DD[Show Progress Interface]
+    
+    DD --> EE[Stage 1: Audio Analysis]
+    EE --> FF[Update Progress 25%]
+    FF --> GG[Stage 2: Vocal Extraction]
+    GG --> HH[Update Progress 50%]
+    HH --> II[Stage 3: Instrument Separation]
+    II --> JJ[Update Progress 75%]
+    JJ --> KK[Stage 4: Finalization]
+    KK --> LL[Update Progress 100%]
+    
+    LL --> MM{Processing Success?}
+    
+    MM -->|Failed| NN[Show Error Message]
+    MM -->|Success| OO[Display Separated Stems]
+    
+    NN --> PP[Offer Retry Options]
+    PP --> Q
+    
+    OO --> QQ[Show Stem Preview Interface]
+    QQ --> RR{User Action}
+    
+    RR -->|Play Individual Stem| SS[Audio Playback Controls]
+    RR -->|Adjust Volume| TT[Volume Mixer Interface]
+    RR -->|Download Single Stem| UU[Individual Download]
+    RR -->|Download All Stems| VV[Bulk Download]
+    RR -->|Share Results| WW[Social Sharing Options]
+    RR -->|Create Custom Mix| XX[Mixing Console]
+    
+    SS --> RR
+    TT --> RR
+    XX --> YY[Export Custom Mix]
+    YY --> RR
+    
+    UU --> ZZ[Generate Download Link]
+    VV --> AAA[Generate Zip Package]
+    
+    ZZ --> BBB[Track Download Analytics]
+    AAA --> BBB
+    
+    BBB --> CCC[Update User Statistics]
+    CCC --> DDD{User Satisfied?}
+    
+    DDD -->|Yes| EEE[Show Feedback Request]
+    DDD -->|No| FFF[Show Support Options]
+    
+    EEE --> GGG[Suggest Related Services]
+    FFF --> HHH[Contact Support Form]
+    
+    GGG --> III{User Interest}
+    
+    III -->|Music Promotion| JJJ[Redirect to Music Tools]
+    III -->|More Stem Separation| KKK[Suggest Subscription]
+    III -->|Producer Services| LLL[Show B2B Options]
+    III -->|Exit| MMM[Thank You Page]
+    
+    WW --> NNN[Social Media Integration]
+    NNN --> OOO{Platform Selection}
+    
+    OOO -->|Instagram| PPP[Format for Instagram]
+    OOO -->|TikTok| QQQ[Format for TikTok]
+    OOO -->|Facebook| RRR[Format for Facebook]
+    OOO -->|LinkedIn| SSS[Format for LinkedIn]
+    
+    PPP --> TTT[Auto-Post with Affiliate Links]
+    QQQ --> TTT
+    RRR --> TTT
+    SSS --> TTT
+    
+    TTT --> UUU[Track Social Engagement]
+    UUU --> VVV[Update Marketing Analytics]
+    
+    HHH --> WWW[Support Ticket Created]
+    WWW --> XXX[Automated Response]
+    XXX --> YYY[Human Follow-up]
+    
+    JJJ --> ZZZ[Cross-sell Success]
+    KKK --> AAAA[Upsell Success]
+    LLL --> BBBB[B2B Lead Generated]
+    
+    ZZZ --> CCCC[Revenue Analytics]
+    AAAA --> CCCC
+    BBBB --> CCCC
+    
+    CCCC --> DDDD[Business Intelligence Dashboard]
+    VVV --> DDDD
+    
+    MMM --> EEEE[Exit Analytics]
+    EEEE --> FFFF[Retargeting Campaign]
+    
+    %% Styling
+    classDef startEnd fill:#e1f5fe,stroke:#01579b,stroke-width:3px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef decision fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px
+    classDef revenue fill:#fff8e1,stroke:#f57f17,stroke-width:3px
+    
+    class A,MMM,EEEE startEnd
+    class C,D,H,M,O,U,CC,DD,EE,GG,II,KK,OO,QQ,SS,TT,XX,YY,ZZ,AAA,BBB,CCC process
+    class B,F,J,P,T,W,AA,MM,RR,DDD,III,OOO decision
+    class EEE,GGG,JJJ,KKK,LLL,ZZZ,AAAA,BBBB success
+    class K,L,NN,BB,FFF,HHH error
+    class V,X,Y,Z,CCCC,DDDD,VVV revenue
+
