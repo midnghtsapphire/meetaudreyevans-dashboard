@@ -47,6 +47,69 @@ const Dashboard = () => {
         </motion.div>
       </div>
 
+      {/* Revenue Apps - Blue Ocean Features */}
+      <div className="metrics-section">
+        <h2>🚀 Revenue Apps (Blue Ocean Features Live)</h2>
+        <div className="metrics-grid">
+          <motion.a 
+            href="https://3001-i97542eaxaub6sbc4d71a-aba7ea15.us2.manus.computer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="metric-card revenue"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            style={{ textDecoration: 'none', cursor: 'pointer' }}
+          >
+            <div className="metric-icon">
+              <Zap size={32} />
+            </div>
+            <div className="metric-content">
+              <h3>TheAltText</h3>
+              <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px' }}>E-commerce SEO & WCAG AAA Compliance</p>
+              <div className="metric-change positive">Blue Ocean Features Live</div>
+            </div>
+          </motion.a>
+
+          <motion.a 
+            href="https://3000-i97542eaxaub6sbc4d71a-aba7ea15.us2.manus.computer"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="metric-card campaigns"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            style={{ textDecoration: 'none', cursor: 'pointer' }}
+          >
+            <div className="metric-icon">
+              <Globe size={32} />
+            </div>
+            <div className="metric-content">
+              <h3>InTheWild</h3>
+              <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px' }}>AI Micro-App Generation Engine</p>
+              <div className="metric-change positive">Blue Ocean Features Live</div>
+            </div>
+          </motion.a>
+
+          <motion.a 
+            href="https://8004-i97542eaxaub6sbc4d71a-aba7ea15.us2.manus.computer/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="metric-card security-card"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            style={{ textDecoration: 'none', cursor: 'pointer', background: 'rgba(52, 152, 219, 0.1)', border: '1px solid rgba(52, 152, 219, 0.2)' }}
+          >
+            <div className="metric-icon">
+              <Shield size={32} />
+            </div>
+            <div className="metric-content">
+              <h3>Forensic Studio</h3>
+              <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px' }}>Batch Analysis & AI Reconstruction</p>
+              <div className="metric-change positive">API & Blue Ocean Features Live</div>
+            </div>
+          </motion.a>
+        </div>
+      </div>
+
       {/* Revenue & Performance Metrics */}
       <div className="metrics-section">
         <h2>💰 Business Performance</h2>
