@@ -15,6 +15,7 @@ import './RealTimeAnalytics.css';
 import TrueCrime from './TrueCrime';
 import RealTimeAnalytics from './RealTimeAnalytics';
 import MultiDomainTracker from './MultiDomainTracker';
+import AppsRepository from './AppsRepository';
 
 // ============================================================================
 // DASHBOARD - Main Overview Page
@@ -786,6 +787,7 @@ const Navigation = () => {
   
   const navItems = [
     { path: '/', icon: Home, label: 'Dashboard', color: '#8B5CF6' },
+    { path: '/apps', icon: Rocket, label: 'Apps', color: '#EC4899' },
     { path: '/music', icon: Music, label: 'Music', color: '#EC4899' },
     { path: '/security', icon: Shield, label: 'Security', color: '#EF4444' },
     { path: '/affiliate', icon: LinkIcon, label: 'Affiliate', color: '#10B981' },
@@ -854,6 +856,7 @@ const App = () => {
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/apps" element={<AppsRepository />} />
               <Route path="/music" element={<MusicSection />} />
               <Route path="/security" element={<SecuritySection />} />
               <Route path="/affiliate" element={<AffiliateManagement />} />
