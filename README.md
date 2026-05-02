@@ -73,3 +73,12 @@ Proprietary — All rights reserved by Audrey Evans.
 ---
 
 *Dashboard provided by free sources and APIs. Built with React, Vite, and Tailwind CSS.*
+
+---
+
+## Test
+
+| Feature | Status |
+|---------|--------|
+| Feature | ✅ Ready |
+
