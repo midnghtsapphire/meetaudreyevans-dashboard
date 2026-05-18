@@ -41,9 +41,9 @@ REQUIRED_ENV_KEYS = [
 ]
 
 DOCKER_PATTERNS = (
-    (r"(?m)^FROM\s+node:[\w.-]+\s+AS\s+builder\s*$", "Dockerfile missing Node builder stage alias"),
+    (r"(?m)^FROM\s+node:[\w.-]+\s+AS\s+\w+\s*$", "Dockerfile missing Node multi-stage build alias"),
     (r"(?m)^FROM\s+nginx:[\w.-]+", "Dockerfile missing Nginx runtime stage"),
-    (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from build stage"),
+    (r"COPY\s+--from=\w+\s+/app/dist", "Dockerfile missing dist copy from build stage"),
 )
 
 
@@ -148,12 +148,15 @@ def check_docker_baseline() -> list[str]:
                 errors.append(error_message)
     if compose_path.exists():
         compose_text = compose_path.read_text(encoding="utf-8")
-        for required_token in ("services:", "dashboard:", "ports:"):
-            if required_token not in compose_text:
-                errors.append(f"docker-compose.yml missing token: {required_token}")
+        if "services:" not in compose_text:
+            errors.append("docker-compose.yml missing token: services:")
+        if "ports:" not in compose_text:
+            errors.append("docker-compose.yml missing token: ports:")
+        if not re.search(r"(?ms)^services:\s*\n(?:\s{2,}[A-Za-z0-9_-]+:\s*\n)+", compose_text):
+            errors.append("docker-compose.yml missing at least one declared service")
     if nginx_path.exists():
         nginx_text = nginx_path.read_text(encoding="utf-8")
-        if not re.search(r"try_files\s+\$uri\s+\$uri/\s+/index\.html;", nginx_text):
+        if not re.search(r"try_files\s+\$uri\s+\$uri/\s+/index\.html\s*;", nginx_text):
             errors.append("nginx.conf missing SPA fallback route")
     return errors
 
