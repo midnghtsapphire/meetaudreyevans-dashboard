@@ -12,7 +12,6 @@ import {
 } from 'lucide-react';
 import './App.css';
 import './RealTimeAnalytics.css';
-import TrueCrime from './TrueCrime';
 import RealTimeAnalytics from './RealTimeAnalytics';
 import MultiDomainTracker from './MultiDomainTracker';
 import AppsRepository from './AppsRepository';
@@ -862,7 +861,6 @@ const App = () => {
               <Route path="/affiliate" element={<AffiliateManagement />} />
               <Route path="/social" element={<SocialMediaManagement />} />
               <Route path="/analytics" element={<AnalyticsPage />} />
-              <Route path="/truecrime" element={<TrueCrime />} />
               <Route path="/realtime" element={<RealTimeAnalytics />} />
               <Route path="/domains" element={<MultiDomainTracker />} />
             </Routes>
