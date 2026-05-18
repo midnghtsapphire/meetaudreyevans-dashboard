@@ -53,6 +53,12 @@ pnpm build
 pnpm preview
 ```
 
+### Launch Readiness Validation
+```bash
+python3 validate.py
+```
+This validates required ship-to-market documentation and baseline release files.
+
 ### Docker
 ```bash
 # Production
@@ -81,4 +87,3 @@ Proprietary — All rights reserved by Audrey Evans.
 | Feature | Status |
 |---------|--------|
 | Feature | ✅ Ready |
-
