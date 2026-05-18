@@ -40,6 +40,12 @@ REQUIRED_ENV_KEYS = [
     "VITE_GHL_PRIVATE_INTEGRATION_TOKEN=",
 ]
 
+DOCKER_PATTERNS = (
+    (r"(?m)^FROM\s+node:[\w.-]+\s+AS\s+builder\s*$", "Dockerfile missing Node builder stage alias"),
+    (r"(?m)^FROM\s+nginx:[\w.-]+", "Dockerfile missing Nginx runtime stage"),
+    (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from build stage"),
+)
+
 
 def check_required_files() -> list[str]:
     errors: list[str] = []
@@ -137,12 +143,7 @@ def check_docker_baseline() -> list[str]:
 
     if dockerfile_path.exists():
         dockerfile_text = dockerfile_path.read_text(encoding="utf-8")
-        docker_patterns = (
-            (r"(?m)^FROM\s+node:[\w.-]+\s+AS\s+builder\s*$", "Dockerfile missing Node builder stage alias"),
-            (r"(?m)^FROM\s+nginx:[\w.-]+", "Dockerfile missing Nginx runtime stage"),
-            (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from build stage"),
-        )
-        for pattern, error_message in docker_patterns:
+        for pattern, error_message in DOCKER_PATTERNS:
             if not re.search(pattern, dockerfile_text):
                 errors.append(error_message)
     if compose_path.exists():
@@ -152,7 +153,7 @@ def check_docker_baseline() -> list[str]:
                 errors.append(f"docker-compose.yml missing token: {required_token}")
     if nginx_path.exists():
         nginx_text = nginx_path.read_text(encoding="utf-8")
-        if "try_files $uri $uri/ /index.html;" not in nginx_text:
+        if not re.search(r"try_files\s+\$uri\s+\$uri/\s+/index\.html;", nginx_text):
             errors.append("nginx.conf missing SPA fallback route")
     return errors
 
