@@ -46,7 +46,11 @@ def check_package_scripts() -> list[str]:
 
 def check_readme_sections() -> list[str]:
     errors: list[str] = []
-    readme = (ROOT / "README.md").read_text(encoding="utf-8").lower()
+    readme_path = ROOT / "README.md"
+    if not readme_path.exists():
+        return ["Missing README.md"]
+
+    readme = readme_path.read_text(encoding="utf-8").lower()
     required_terms = ["overview", "features", "quick start"]
 
     for term in required_terms:
