@@ -8,6 +8,7 @@ This document captures implementation-ready baseline guidance for aligning the d
 - Product feedback board (market signal source): https://ideas.gohighlevel.com/
 
 ## Core Objects + Baseline Field Contract
+Field names below reflect current GoHighLevel-style API naming conventions for external integration payloads (not renamed internal aliases).
 
 ### Contact
 - Required baseline: `email` or `phone`

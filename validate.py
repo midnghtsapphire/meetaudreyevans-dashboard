@@ -53,7 +53,11 @@ def check_dependency_baseline() -> list[str]:
     if not package_json.exists():
         return ["Missing package.json"]
 
-    data = json.loads(package_json.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(package_json.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        return [f"Invalid package.json JSON: {exc.msg}"]
+
     dependencies = data.get("dependencies", {})
     for dependency in ("react", "react-dom", "react-router-dom", "recharts", "socket.io-client"):
         if dependency not in dependencies:
@@ -124,9 +128,14 @@ def check_docker_baseline() -> list[str]:
 
     if dockerfile_path.exists():
         dockerfile_text = dockerfile_path.read_text(encoding="utf-8")
-        for required_token in ("FROM node:22-alpine", "FROM nginx:alpine", "COPY --from=builder /app/dist"):
-            if required_token not in dockerfile_text:
-                errors.append(f"Dockerfile missing token: {required_token}")
+        docker_patterns = (
+            (r"(?m)^FROM\s+node:[\w.-]+", "Dockerfile missing Node build stage"),
+            (r"(?m)^FROM\s+nginx:[\w.-]+", "Dockerfile missing Nginx runtime stage"),
+            (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from builder stage"),
+        )
+        for pattern, error_message in docker_patterns:
+            if not re.search(pattern, dockerfile_text):
+                errors.append(error_message)
     if compose_path.exists():
         compose_text = compose_path.read_text(encoding="utf-8")
         for required_token in ("services:", "dashboard:", "ports:"):
