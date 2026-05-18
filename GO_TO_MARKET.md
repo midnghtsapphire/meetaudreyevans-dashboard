@@ -69,3 +69,4 @@ This repository should map dashboard data to common GoHighLevel entities:
 - [x] Changelog initialized
 - [x] Go-to-market plan documented
 - [x] Validation script included (`validate.py`)
+- [x] GoHighLevel research + implementation baseline documented (`GHL_RESEARCH_BASELINE.md`)

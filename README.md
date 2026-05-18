@@ -59,6 +59,9 @@ python3 validate.py
 ```
 This validates required ship-to-market documentation and baseline release files.
 
+### GoHighLevel Baseline Reference
+- Implementation and market-signal baseline: `GHL_RESEARCH_BASELINE.md`
+
 ### Docker
 ```bash
 # Production
