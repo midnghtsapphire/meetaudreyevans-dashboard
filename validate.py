@@ -32,6 +32,14 @@ REQUIRED_DEPENDENCIES = [
     "socket.io-client",
 ]
 
+REQUIRED_ENV_KEYS = [
+    "VITE_API_BASE_URL=",
+    "VITE_WEBSOCKET_URL=",
+    "VITE_GHL_API_BASE_URL=",
+    "VITE_GHL_LOCATION_ID=",
+    "VITE_GHL_PRIVATE_INTEGRATION_TOKEN=",
+]
+
 
 def check_required_files() -> list[str]:
     errors: list[str] = []
@@ -96,14 +104,7 @@ def check_env_baseline() -> list[str]:
         return ["Missing .env.example"]
 
     env_example = env_example_path.read_text(encoding="utf-8")
-    required_keys = [
-        "VITE_API_BASE_URL=",
-        "VITE_WEBSOCKET_URL=",
-        "VITE_GHL_API_BASE_URL=",
-        "VITE_GHL_LOCATION_ID=",
-        "VITE_GHL_PRIVATE_INTEGRATION_TOKEN=",
-    ]
-    for key in required_keys:
+    for key in REQUIRED_ENV_KEYS:
         if key not in env_example:
             errors.append(f".env.example missing key: {key.rstrip('=')}")
     return errors
@@ -137,9 +138,9 @@ def check_docker_baseline() -> list[str]:
     if dockerfile_path.exists():
         dockerfile_text = dockerfile_path.read_text(encoding="utf-8")
         docker_patterns = (
-            (r"(?m)^FROM\s+node:[\w.-]+", "Dockerfile missing Node build stage"),
+            (r"(?m)^FROM\s+node:[\w.-]+\s+AS\s+builder\s*$", "Dockerfile missing Node builder stage alias"),
             (r"(?m)^FROM\s+nginx:[\w.-]+", "Dockerfile missing Nginx runtime stage"),
-            (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from builder stage"),
+            (r"COPY\s+--from=builder\s+/app/dist", "Dockerfile missing dist copy from build stage"),
         )
         for pattern, error_message in docker_patterns:
             if not re.search(pattern, dockerfile_text):

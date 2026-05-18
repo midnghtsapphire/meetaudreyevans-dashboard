@@ -3,6 +3,7 @@
 This document captures implementation-ready baseline guidance for aligning the dashboard with GoHighLevel-style CRM and automation workflows.
 
 ## Canonical Documentation Sources
+Last verified: 2026-05-18 (API V2 public docs and public feedback board URLs)
 - GoHighLevel API docs: https://marketplace.gohighlevel.com/docs/
 - Official API repository/spec references: https://github.com/GoHighLevel/highlevel-api-docs
 - Product feedback board (market signal source): https://ideas.gohighlevel.com/
@@ -11,7 +12,7 @@ This document captures implementation-ready baseline guidance for aligning the d
 Field names below reflect current GoHighLevel-style API naming conventions for external integration payloads (not renamed internal aliases).
 
 ### Contact
-- Required baseline: `email` or `phone`
+- Required baseline: at least one of `email` or `phone` must be present (inclusive OR)
 - Common fields: `firstName`, `lastName`, `email`, `phone`, `companyName`, `tags`, `customFields[]`, `source`
 
 ### Opportunity
