@@ -24,6 +24,14 @@ REQUIRED_FILES = [
     "nginx.conf",
 ]
 
+REQUIRED_DEPENDENCIES = [
+    "react",
+    "react-dom",
+    "react-router-dom",
+    "recharts",
+    "socket.io-client",
+]
+
 
 def check_required_files() -> list[str]:
     errors: list[str] = []
@@ -59,7 +67,7 @@ def check_dependency_baseline() -> list[str]:
         return [f"Invalid package.json JSON: {exc.msg}"]
 
     dependencies = data.get("dependencies", {})
-    for dependency in ("react", "react-dom", "react-router-dom", "recharts", "socket.io-client"):
+    for dependency in REQUIRED_DEPENDENCIES:
         if dependency not in dependencies:
             errors.append(f"Missing baseline dependency: {dependency}")
     return errors
