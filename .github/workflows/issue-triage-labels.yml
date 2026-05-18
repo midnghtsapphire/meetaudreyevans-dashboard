@@ -31,7 +31,7 @@ jobs:
             if (text.includes('revvel')) matching.push('revvel-standards');
             if (text.includes('ship to market') || text.includes('ship-to-market') || text.includes('go to market')) matching.push('ship-to-market');
             if (text.includes('gohighlevel')) matching.push('integration:gohighlevel');
-            if (text.includes('research') || text.includes('scrape') || text.includes('docs')) matching.push('research');
+            if (/\bresearch\b|\bscrape\b|\bscraping\b/.test(text)) matching.push('research');
 
             if (matching.length === 0) matching.push('documentation');
             if (!matching.includes('documentation') && text.includes('document')) matching.push('documentation');

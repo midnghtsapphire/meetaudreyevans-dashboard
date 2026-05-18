@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from pathlib import Path
 import json
+import re
 import sys
 
 
@@ -50,12 +51,13 @@ def check_readme_sections() -> list[str]:
     if not readme_path.exists():
         return ["Missing README.md"]
 
-    readme = readme_path.read_text(encoding="utf-8").lower()
-    required_terms = ["overview", "features", "quick start"]
+    readme = readme_path.read_text(encoding="utf-8")
+    required_headings = ["Overview", "Features", "Quick Start"]
 
-    for term in required_terms:
-        if term not in readme:
-            errors.append(f"README.md missing expected section/term: {term}")
+    for heading in required_headings:
+        pattern = rf"^##\s+{re.escape(heading)}\s*$"
+        if not re.search(pattern, readme, flags=re.IGNORECASE | re.MULTILINE):
+            errors.append(f"README.md missing expected heading: {heading}")
     return errors
 
 
