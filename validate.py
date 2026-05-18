@@ -156,7 +156,7 @@ def check_docker_baseline() -> list[str]:
             errors.append("docker-compose.yml missing at least one declared service")
     if nginx_path.exists():
         nginx_text = nginx_path.read_text(encoding="utf-8")
-        if not re.search(r"try_files\s+[$]uri\s+[$]uri/\s+/index\.html\s*;", nginx_text):
+        if not re.search(r"try_files\s+\$uri\s+\$uri/\s+/index\.html\s*;", nginx_text):
             errors.append("nginx.conf missing SPA fallback route")
     return errors
 
