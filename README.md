@@ -1,5 +1,9 @@
 # Meet Audrey Evans — Dashboard
 
+
+<!-- AUTO-PACKAGE-BADGES:START -->
+
+<!-- AUTO-PACKAGE-BADGES:END -->
 > Real-time analytics dashboard with multi-domain tracking, music industry tools, affiliate management, and business intelligence.
 
 ## Overview
